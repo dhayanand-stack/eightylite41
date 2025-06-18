@@ -101,3 +101,37 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Mobile-specific optimizations */
+@layer utilities {
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+  
+  /* Ensure minimum touch target size on mobile */
+  @media (max-width: 768px) {
+    button, input[type="button"], input[type="submit"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+  
+  /* Improve text readability on mobile */
+  @media (max-width: 768px) {
+    body {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+  
+  /* Prevent zoom on input focus on iOS */
+  @media screen and (max-width: 768px) {
+    input[type="text"], 
+    input[type="email"], 
+    input[type="password"], 
+    textarea, 
+    select {
+      font-size: 16px;
+    }
+  }
+}

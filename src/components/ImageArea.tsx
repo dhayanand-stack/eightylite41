@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 
 interface ImageAreaProps {
@@ -67,7 +66,7 @@ export const ImageArea: React.FC<ImageAreaProps> = ({ image, onImageChange, onDe
   return (
     <div className="relative">
       <div
-        className={`border-2 border-dashed p-4 min-h-48 flex flex-col items-center justify-center cursor-pointer ${
+        className={`border-2 border-dashed p-4 min-h-48 md:min-h-64 flex flex-col items-center justify-center cursor-pointer touch-manipulation ${
           isSelected ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
         }`}
         onClick={handleClick}
@@ -77,24 +76,35 @@ export const ImageArea: React.FC<ImageAreaProps> = ({ image, onImageChange, onDe
         tabIndex={0}
       >
         {image ? (
-          <img src={image} alt="Uploaded" className="max-w-full max-h-full object-contain" />
+          <div className="w-full h-full flex items-center justify-center">
+            <img 
+              src={image} 
+              alt="Uploaded" 
+              className="max-w-full max-h-full object-contain rounded"
+              style={{ 
+                maxHeight: '400px',
+                width: 'auto',
+                height: 'auto'
+              }}
+            />
+          </div>
         ) : (
-          <div className="text-center">
+          <div className="text-center p-4">
             {isSelected ? (
-              <div>
-                <p className="text-gray-600 mb-2">Now you can paste an image or click upload button below</p>
+              <div className="space-y-4">
+                <p className="text-gray-600 mb-4 text-sm md:text-base">Now you can paste an image or click upload button below</p>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     handleFileUpload();
                   }}
-                  className="text-blue-500 underline"
+                  className="text-blue-500 underline text-lg py-2 px-4 touch-manipulation"
                 >
                   Click to upload
                 </button>
               </div>
             ) : (
-              <p className="text-gray-600">Image - Click to select, then paste or upload</p>
+              <p className="text-gray-600 text-sm md:text-base">Image - Click to select, then paste or upload</p>
             )}
           </div>
         )}
@@ -103,7 +113,7 @@ export const ImageArea: React.FC<ImageAreaProps> = ({ image, onImageChange, onDe
       {image && (
         <button
           onClick={onDelete}
-          className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded"
+          className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
         >
           Delete
         </button>

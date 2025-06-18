@@ -61,61 +61,68 @@ export const TemplateCreatePopup: React.FC<TemplateCreatePopupProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg w-96 max-h-96 overflow-y-auto">
-        <div className="flex justify-between items-center mb-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white p-6 rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
+        <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg font-semibold">Create Template</h2>
-          <button onClick={onClose} className="p-1">
+          <button 
+            onClick={onClose} 
+            className="p-2 hover:bg-gray-100 rounded touch-manipulation"
+          >
             <X size={20} />
           </button>
         </div>
         
-        <div className="text-center mb-4">
+        <div className="text-center mb-6">
           <button
             onClick={addText}
-            className="flex items-center justify-center mx-auto p-2 bg-blue-500 text-white rounded"
+            className="flex items-center justify-center mx-auto p-3 bg-blue-500 text-white rounded touch-manipulation"
           >
             <Plus size={16} className="mr-1" />
             Add Text
           </button>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-4">
           {texts.map((text, index) => (
-            <div key={index} className="flex items-center space-x-2">
-              <span className="text-sm">{index + 1}.</span>
-              <input
-                type="text"
-                value={text}
-                onChange={(e) => updateText(index, e.target.value)}
-                onClick={() => setSelectedIndex(index)}
-                className={`flex-1 p-2 border rounded ${
-                  selectedIndex === index ? 'border-green-500 bg-green-50' : 'border-gray-300'
-                }`}
-                placeholder="Enter text"
-              />
-              <button
-                onClick={() => handleSave()}
-                className="px-3 py-1 bg-green-500 text-white rounded text-sm"
-                disabled={selectedIndex !== index || !text.trim()}
-              >
-                Done
-              </button>
-              <button
-                onClick={() => deleteText(index)}
-                className="p-1 text-red-500"
-              >
-                <X size={16} />
-              </button>
+            <div key={index} className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium min-w-[20px]">{index + 1}.</span>
+                <input
+                  type="text"
+                  value={text}
+                  onChange={(e) => updateText(index, e.target.value)}
+                  onClick={() => setSelectedIndex(index)}
+                  className={`flex-1 p-3 border rounded-lg text-lg ${
+                    selectedIndex === index ? 'border-green-500 bg-green-50' : 'border-gray-300'
+                  }`}
+                  placeholder="Enter text"
+                />
+                <button
+                  onClick={() => deleteText(index)}
+                  className="p-2 text-red-500 hover:bg-red-50 rounded touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave()}
+                  className="flex-1 px-3 py-2 bg-green-500 text-white rounded text-sm touch-manipulation"
+                  disabled={selectedIndex !== index || !text.trim()}
+                >
+                  Done
+                </button>
+              </div>
             </div>
           ))}
         </div>
 
         {selectedIndex >= 0 && (
-          <div className="mt-4">
+          <div className="mt-6">
             <button
               onClick={handleSave}
-              className="w-full bg-blue-500 text-white p-2 rounded"
+              className="w-full bg-blue-500 text-white p-4 rounded-lg text-lg font-medium touch-manipulation"
             >
               Save Template
             </button>

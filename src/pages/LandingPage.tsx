@@ -39,30 +39,30 @@ export const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center space-y-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="text-center space-y-6 w-full max-w-sm">
         <button
           onClick={() => setShowCreatePopup(true)}
-          className="block w-48 bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600"
+          className="block w-full bg-blue-500 text-white py-4 px-6 rounded-lg hover:bg-blue-600 text-lg font-medium touch-manipulation"
         >
           Create Code
         </button>
         
         <button
           onClick={() => setShowEnterField(true)}
-          className="block w-48 bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600"
+          className="block w-full bg-green-500 text-white py-4 px-6 rounded-lg hover:bg-green-600 text-lg font-medium touch-manipulation"
         >
           Enter Code
         </button>
 
         {showEnterField && (
-          <div className="mt-4 space-y-2">
+          <div className="mt-6 space-y-4">
             <input
               type="text"
               value={enterCode}
               onChange={(e) => setEnterCode(e.target.value)}
               placeholder="Enter existing code"
-              className="w-48 p-2 border rounded"
+              className="w-full p-4 border rounded-lg text-lg"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   handleEnterCode();
@@ -72,7 +72,7 @@ export const LandingPage: React.FC = () => {
             <button
               onClick={handleEnterCode}
               disabled={isChecking}
-              className={`block w-48 bg-gray-500 text-white py-2 px-6 rounded ${
+              className={`block w-full bg-gray-500 text-white py-4 px-6 rounded-lg text-lg font-medium touch-manipulation ${
                 isChecking ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-600'
               }`}
             >
